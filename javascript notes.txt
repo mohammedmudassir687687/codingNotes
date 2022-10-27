@@ -1,0 +1,596 @@
+* Converting numbers/ decimals (positives) into a binary number.
+
+let a=16 console.log(a.toString(2)) // 2 is radix and can be any base between 2 and 64.
+
+* Converting numbers/ decimals (negatives) into a binary number.
+
+let a = -15 console.log((a>>>0).toString(2)) // >>> is the unsigned right shift operator
+
+* Primitive Data types : Number, Boolean , String, undefined, null
+  Reference types : Object, Array, Functions
+
+* To convert a string to a number
+  console.log(parseInt("129")
+
+* Ways to declare functions:
+
+i) function a(){    ii) let a = function(){        iii) let a = () =>{
+
+}                     }                                }
+
+* JS Scopes
+
+-> let and const are block scopes. i.e                 -> var has a global scope
+{							{
+  let a=100 or const a=100				   var a=1001
+}							}
+// a Cannot be used here. It will give a reference error  // a Can be used here. If execution-control didn't get into that block, then a is undefined.
+--------------------------------------------------------------------------------------------------------------
+* Arrays 
+ 
+Creation of 1-D Array: let a = [], let a = new Array()
+Creation of multi-dimensional arrays:
+
+const M = 3, N = 4;
+ 
+var arr = Array.from(Array(M), () => new Array(N));
+console.log(arr);
+
+-> We can access array elements using indexing.
+
+* Some important array methods:
+
+i) push() : The push() method adds one or more elements to the end of an array and returns the new length of the array. It makes changes to the existing array.
+const animals = ['pigs', 'goats', 'sheep'];
+
+const count = animals.push('cows');
+console.log(count); // expected output: 4
+console.log(animals); // expected output: Array ["pigs", "goats", "sheep", "cows"]
+
+ii) unshift() : The unshift() method adds one or more elements to the beginning of an array and returns the new length of the array.
+const array1 = [1, 2, 3];
+
+console.log(array1.unshift(4, 5)); // expected output: 5
+console.log(array1); // expected output: Array [4, 5, 1, 2, 3]
+
+iii) pop() : Removes the last element from an array and returns that element. This method changes the length of the array.
+
+const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
+
+console.log(plants.pop()); // expected output: "tomato"
+
+console.log(plants); // expected output: Array ["broccoli", "cauliflower", "cabbage", "kale"]
+
+iv) shift() : removes the first element from an array and returns that removed element. This method changes the length of the array.
+
+const array1 = [1, 2, 3]; const firstElement = array1.shift();
+console.log(array1); // expected output: Array [2, 3]
+console.log(firstElement); // expected output: 1
+
+v) concat() : method is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
+
+const array1 = ['a', 'b', 'c']; const array2 = ['d', 'e', 'f']; const array3 = array1.concat(array2);
+
+console.log(array3); // expected output: Array ["a", "b", "c", "d", "e", "f"]
+
+vi) join() : method creates and returns a new string by concatenating all of the elements in an array , separated by commas or a specified separator string. 
+
+const elements = ['Fire', 'Air', 'Water'];
+
+console.log(elements.join()); // expected output: "Fire,Air,Water"
+
+console.log(elements.join('')); // expected output: "FireAirWater"
+
+console.log(elements.join('-')); // expected output: "Fire-Air-Water"
+
+vii) slice() : method returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of items in that array. The original array will not be modified.
+
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(2)); // expected output: Array ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4)); // expected output: Array ["camel", "duck"]
+
+viii) splice() :  method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+
+splice(start, deleteCount, item1) //deleteCount and item1 are optional. If we provie just the start index, then splice will remove all the elements from start to end of array.
+
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb'); // Remove 0 elements at index 1 and insert Feb
+// inserts at index 1
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+months.splice(4, 1, 'May'); //Remove 1 element at index 1 and insert May.
+// replaces 1 element at index 4
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
+9) includes() :  method determines whether an array includes a certain value among its entries, returning true or false as appropriate.
+const array1 = [1, 2, 3];
+
+console.log(array1.includes(2)); // expected output: true
+
+10) toString() : method returns a string representation of array.
+let a=[1,2,3,4,5,6]
+console.log(a.toString()) // Expected output : 1,2,3,4,5,6
+
+11) indexOf() :  method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+console.log(beasts.indexOf('bison'));  // expected output: 1
+
+12) length : returns the number of elements in array.
+const clothing = ['shoes', 'shirts', 'socks', 'sweaters'];
+
+console.log(clothing.length); // expected output: 4
+
+13) sort() : method sorts the elements of an array in place and returns the reference to the same array, now sorted.
+
+By default, array elements are converted to String and are sorted, so if we are sorting numbers, we need to provide a comparatorfunction to sort().
+
+// Using sort in array of strings
+const months = ['March', 'Jan', 'Feb', 'Dec'];
+months.sort();
+console.log(months); // expected output: Array ["Dec", "Feb", "Jan", "March"]
+
+// Using sort in array of numbers
+const array1 = [1, 30, 4, 21, 100000];
+array1.sort((a,b) => a-b ); //Sort elements in ascending order. b-a will sort it in descending order.
+console.log(array1); // [ 1, 4, 21, 30, 100000 ]
+
+14) reverse() :  reverses an array in place and returns the reference to the same array, the first array element now becoming the last, and the last array element becoming the first.
+
+// Using reverse in array of strings.
+const array1 = ['one', 'two', 'three'];
+console.log('array1:', array1); // expected output: "array1:" Array ["one", "two", "three"]
+
+const reversed = array1.reverse();
+console.log('reversed:', reversed);
+// expected output: "reversed:" Array ["three", "two", "one"]
+
+15) map() : method creates a new array populated with the results of calling a provided function on every element in the calling array.
+
+const array1 = [1, 4, 9, 16];
+// pass a function to map
+const map1 = array1.map(x => x * 2);
+console.log(map1); // expected output: Array [2, 8, 18, 32]
+
+16) forEach() : method executes a provided function once for each array element.
+
+const array1 = ['a', 'b', 'c'];
+
+array1.forEach(element => console.log(element));
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+
+17) filter() : creates a new array filled with elements that pass a test provided by a function.
+
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter(word => word.length > 6);
+console.log(result); // expected output: Array ["exuberant", "destruction", "present"]
+
+18) reduce() : The reduce() method executes a reducer function on each element of the array and returns a single output value.
+const array1 = [1,2,3,4];
+const sum = array1.reduce((accumulator,currentVal)=>{
+   return accumulator+currentVal 
+},0)
+console.log(sum) //10
+
+19) every() : tests if every element in the array pass the test implemented by the provided function. It returns a Boolean value.
+const isBelowThreshold = (currentValue) => currentValue < 40;
+
+const array1 = [1, 30, 39, 29, 10, 13];
+
+console.log(array1.every(isBelowThreshold)); // expected output: true
+
+20) some() : returns true if at least one element in the array passes the test implemented by the provided function.
+const array = [1, 2, 3, 4, 5];
+
+// checks whether an element is even
+const even = (element) => element % 2 === 0;
+
+console.log(array.some(even)); // expected output: true
+
+21) from() :  method creates a new, shallow-copied Array instance from an iterable or array-like object.
+console.log(Array.from('foo')); // expected output: Array ["f", "o", "o"]
+
+console.log(Array.from([1, 2, 3], x => x + x)); // expected output: Array [2, 4, 6]
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* String Methods in Javascript
+//All the methods will return a new string and won't make any changes to the original string.
+'eclipse'.length // 7
+'eclipse'[1] // 'c'
+'eclipse'.includes('ips') // true
+'eclipse'.indexOf('cl') //1
+'eclipse'.startsWith('e') // true
+'eclipse'.endsWith('x')//false
+'eclipse'.slice(0,4) //'ecli'
+'eclipse'.toUpperCase() // 'ECLIPSE'
+'ECLipsE'.toLowerCase() // 'eclipse'
+'eclipse'.replace('li','zz') //'eczzpse'
+'eclipse'.repeat(3) //'eclipseeclipseeclipse'
+'ecl ipse'.split('') //['e','c'.'l','i','p','s','e']
+'ecli pse'.split(' ') //['ecli','pse']
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Array De-structuring 
+
+Example 1: let a, b, rest;
+[a, b] = [10, 20];
+
+console.log(a); // expected output: 10
+console.log(b); // expected output: 20
+
+Example 2: const x = [1, 2, 3, 4, 5];
+const [y, z] = x;
+console.log(y); // 1
+console.log(z); // 2
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Object De-structuring 
+
+The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
+
+const obj = { a: 1, b: 2 };
+const { a, b } = obj;
+// is equivalent to:
+// const a = obj.a; i.e a=1
+// const b = obj.b; i.e b =2
+
+//We can similarly use another variable name for each property
+const {a:apple , b: ball} = obj
+console.log(apple,ball) // 1,2
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Spread and Rest Operator 
+
+Spread syntax (...) allows an iterable, such as an array or string, to be expanded into individual elements. 
+
+function sum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+console.log(sum(...numbers)); // expected output: 6
+
+Also, it can be used with objects.the spread syntax enumerates the properties of an object and adds the key-value pairs to the object being create
+
+let obj ={a:1, c:3}
+let obj1={...obj} 
+console.log(obj1) // {a:1, c:3}
+
+* Rest Operator
+The rest parameter syntax allows a function to accept an indefinite number of arguments as an array.
+
+Example 1: function sum(...theArgs) {
+  let total = 0;
+  for (const arg of theArgs) {
+    total += arg;
+  }
+  return total;
+}
+
+console.log(sum(1, 2, 3)); // expected output: 6
+
+Example 2: let a = [1,2,3,4,5,6]
+let [b,c,...d]=a
+console.log(b) //1
+console.log(c) // 2
+console.log(d) // [3,4,5,6]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Deep copy of array and string can be obtained using spread operator.
+
+let arr = [1,2,3,4,5,6], let obj = {a:1,b:2,c:3,d:4}
+
+let arr1 = [...arr] // will create a deep copy of arr array
+let obj1 = {...obj} // will create a deep copy of obj object.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Objects : An object is a collection of properties, and a property is an association between a name (or key) and a value. 
+
+Example: const myCar = {
+  make: 'Ford',
+  model: 'Mustang',
+  year: 1969
+};
+
+//Accessing keys can be done using 2 ways:
+myCar.model //'Mustang'
+myCar.color // undefined as the key doesn't exist.
+mycar['year'] // 1969. The properties of an object can also be accessed using square brackets also called as property accessors.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Enumerating over the properties of an object.
+
+i) for...in
+
+The for...in statement iterates over all enumerable string properties of an object.
+
+const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+  console.log(`${property}: ${object[property]}`);
+}
+
+// expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3"
+
+ii) Object.keys() : method returns an array of a given object's own enumerable property names, iterated in the same order that a normal loop would.
+
+const object1 = {
+  a: 'somestring',
+  b: 42,
+  c: false
+};
+
+console.log(Object.keys(object1)); // expected output: Array ["a", "b", "c"] 
+
+iii) Object.entries() : method returns an array of a given object's own enumerable string-keyed property [key, value] pairs.
+
+const object1 = {
+  a: 'somestring',
+  b: 42
+};
+
+for (const [key, value] of Object.entries(object1)) {
+  console.log(`${key}: ${value}`);
+}
+
+// expected output:
+// "a: somestring"
+// "b: 42"
+
+* Deleting properties in an object
+
+let obj = {a:1,b:2,c:3,d:4}
+delete obj.a
+console.log('a' in obj) // false
+console.log(obj) //{ b: 2, c: 3, d: 4 }
+
+* Comparing key-value pairs
+
+In JavaScript, objects are a reference type. Two distinct objects are never equal, even if they have the same properties. Only comparing the same object reference with itself yields true.
+
+Example 1:
+const fruit = {name: 'apple'};
+const fruitbear = {name: 'apple'};
+
+fruit == fruitbear; // return false
+fruit === fruitbear; // return false
+
+Example 2:
+// Two variables, a single object
+const fruit = {name: 'apple'};
+const fruitbear = fruit;  // Assign fruit object reference to fruitbear
+
+// Here fruit and fruitbear are pointing to same object
+fruit == fruitbear; // return true
+fruit === fruitbear; // return true
+
+fruit.name = 'grape';
+console.log(fruitbear); // output: { name: "grape" }, instead of { name: "apple" }
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Falsy values : A falsy (sometimes written falsey) value is a value that is considered false when encountered in a Boolean context.
+Example: false, 0, -0, null, undefined, "",'',``,etc.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Map object
+
+The Map object holds key-value pairs and remembers the original insertion order of the keys.  A key in the Map may only occur once; it is unique in the Map's collection. 
+
+const map1 = new Map();
+
+map1.set('a', 1); map1.set('b', 2); map1.set('c', 3);
+
+console.log(map1.get('a')); // expected output: 1
+
+map1.set('a', 97);
+
+console.log(map1.get('a')); // expected output: 97
+
+console.log(map1.size); // expected output: 3
+
+map1.delete('b');
+
+console.log(map1.size); // expected output: 2
+
+A key in the Map may only occur once; it is unique in the Map's collection. 
+
+A Map object is iterated by key-value pairs — a for...of loop returns a 2-member array of [key, value] for each iteration. 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*                                              Map                                             vs                                                              Object
+
+1. Key Types:  A Map's keys can be any value (including functions, objects, or any primitive).      In Object, the data-type of the key-field is restricted to integer, strings, and symbols. 
+
+2. Key Order: In the Map, the original order of elements is preserved.                              Although the keys of an ordinary Object are ordered now, this was not always the case, and the order is complex. As a result, it's best not to rely on property order.
+
+3. Size:      The number of items in a Map is easily retrieved from its size property.              The number of items in an Object must be determined manually.
+
+4. Iteration: A Map is an iterable, so it can be directly iterated.                                 Objects are not directly iterable.
+
+5. Performance: Performs better in scenarios involving frequent additions and removals of           Not optimized for frequent additions and removals of key-value pairs.
+                key-value pairs.
+
+6. Map is an instance of object but vice-versa is not true.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Various map methods
+
+i) clear(): removes all elements from a Map object.
+
+const map1 = new Map();
+
+map1.set('bar', 'baz'); map1.set(1, 'foo');
+map1.clear(); 
+console.log(map1.size); // expected output: 0
+
+ii) delete(): method removes the specified element from a Map object by key.
+const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.delete('bar'));// expected result: true (true indicates successful removal)
+
+iii) set(),get() already seen.
+
+iv) has():  method returns a boolean indicating whether an element with the specified key exists or not.
+
+const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.has('bar')); // expected output: true
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Iterating map with for...of
+
+const myMap = new Map();
+myMap.set(0, 'zero');
+myMap.set(1, 'one');
+
+for (const [key, value] of myMap) {
+  console.log(`${key} = ${value}`);
+}
+// 0 = zero
+// 1 = one
+
+for (const key of myMap.keys()) {
+  console.log(key);
+}
+// 0
+// 1
+
+for (const value of myMap.values()) {
+  console.log(value);
+}
+// zero
+// one
+
+for (const [key, value] of myMap.entries()) {
+  console.log(`${key} = ${value}`);
+}
+// 0 = zero
+// 1 = one
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Converting 2D arrays into maps.
+
+const kvArray = [['key1', 'value1'], ['key2', 'value2']];
+
+// Use the regular Map constructor to transform a 2D key-value Array into a map
+const myMap = new Map(kvArray);
+console.log(myMap) // {'key1':'value1','key2':'value2'}
+console.log(myMap.get('key1'))//'value1'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Cloning Maps
+
+const original = new Map([
+  [1, 'one'],
+]);
+
+const clone = new Map(original);
+
+console.log(clone.get(1)); // one
+console.log(original === clone); // false 
+
+* Merging Maps
+
+const first = new Map([
+  [1, 'one'],
+  [2, 'two'],
+  [3, 'three'],
+]);
+
+const second = new Map([
+  [1, 'uno'],
+  [2, 'dos'],
+]);
+
+// Merge two maps. The last repeated key wins.
+// Spread syntax essentially converts a Map to an Array
+const merged = new Map([...first, ...second]);
+
+console.log(merged.get(1)); // uno
+console.log(merged.get(2)); // dos
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Set
+
+The Set object lets you store unique values of any type, whether primitive values or object references.
+
+Example1:
+const set1 = new Set([1, 2, 3, 4, 5]);
+
+console.log(set1.has(1)); // expected output: true
+
+Example2:
+const mySet = new Set();
+
+mySet.add(1); // Set [ 1 ]
+mySet.add(5); // Set [ 1, 5 ]
+mySet.add(5); // Set [ 1, 5 ]
+mySet.add("some text"); // Set [ 1, 5, 'some text' ]
+const o = { a: 1, b: 2 };
+mySet.add(o);
+console.log(mySet) // { 1, 5, 'some text', { a: 1, b: 2 } }
+
+Example 3: 
+const set1 = new Set();
+set1.add(1);
+set1.add('foo');
+
+console.log(set1.size); // expected output: 2
+
+set1.clear(); // Removes all the elements from the set
+
+console.log(set1.size); // expected output: 0
+
+set1.delete(1) // Returns a boolean value after deleting the value in set
+
+* Iterating over a set
+
+i) entries(): The entries() method returns a new Iterator object that contains an array of [value, value] for each element in the Set object, in insertion order. 
+	       For Set objects there is no key like in Map objects. However, to keep the API similar to the Map object, it will return [value,value] pair.
+
+const set1 = new Set();
+set1.add(42);
+set1.add('forty two');
+
+const iterator1 = set1.entries();
+
+for (const entry of iterator1) {
+  console.log(entry);
+  // expected output: [42, 42]
+  // expected output: ["forty two", "forty two"]
+}
+
+ii) values() and keys() return an iteratable object.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
