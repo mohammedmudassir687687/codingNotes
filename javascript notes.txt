@@ -10,7 +10,7 @@ let a = -15 console.log((a>>>0).toString(2)) // >>> is the unsigned right shift 
   Reference types : Object, Array, Functions
 
 * To convert a string to a number
-  console.log(parseInt("129")
+  console.log(parseInt("129"))
 
 * Ways to declare functions:
 
@@ -20,7 +20,7 @@ i) function a(){    ii) let a = function(){        iii) let a = () =>{
 
 * JS Scopes
 
--> let and const are block scopes. i.e                 -> var has a global scope
+-> let and const are block scopes. i.e                 -> var has a function scoped
 {							{
   let a=100 or const a=100				   var a=1001
 }							}
@@ -138,6 +138,20 @@ const array1 = [1, 30, 4, 21, 100000];
 array1.sort((a,b) => a-b ); //Sort elements in ascending order. b-a will sort it in descending order.
 console.log(array1); // [ 1, 4, 21, 30, 100000 ]
 
+// sorting 2d arrays, the below will sort based on first column
+var a = [[12, 'AAA'], [58, 'BBB'], [28, 'CCC'],[18, 'DDD']];
+
+a.sort(sortFunction);
+
+function sortFunction(a, b) {
+    if (a[0] === b[0]) {
+        return 0;
+    }
+    else {
+        return (a[0] < b[0]) ? -1 : 1;
+    }
+}
+
 14) reverse() :  reverses an array in place and returns the reference to the same array, the first array element now becoming the last, and the last array element becoming the first.
 
 // Using reverse in array of strings.
@@ -213,7 +227,7 @@ console.log(Array.from([1, 2, 3], x => x + x)); // expected output: Array [2, 4,
 'ECLipsE'.toLowerCase() // 'eclipse'
 'eclipse'.replace('li','zz') //'eczzpse'
 'eclipse'.repeat(3) //'eclipseeclipseeclipse'
-'ecl ipse'.split('') //['e','c'.'l','i','p','s','e']
+'eclipse'.split('') //['e','c'.'l','i','p','s','e']
 'ecli pse'.split(' ') //['ecli','pse']
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
