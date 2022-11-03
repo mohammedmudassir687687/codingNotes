@@ -1,3 +1,5 @@
+Author: Mudassir Mohammed
+
 Command: The command refers to the program run by the user.
 Option(s): The option tell the command how to operate. It always starts with "-" character 
 and has a single letter.
