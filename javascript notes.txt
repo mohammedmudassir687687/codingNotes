@@ -1,3 +1,5 @@
+Author: Mohammed Abbas
+
 * Converting numbers/ decimals (positives) into a binary number.
 
 let a=16 console.log(a.toString(2)) // 2 is radix and can be any base between 2 and 64.
