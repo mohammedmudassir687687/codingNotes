@@ -1,3 +1,5 @@
+// Author: Mudassir Mohammed
+
 Binary numbers are represented as follow: 4 = 0b100 #first two letters will be 0b
 • The bin function can be used to create a binary String from an integer
 • Example;
