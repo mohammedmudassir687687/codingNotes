@@ -1,0 +1,251 @@
+// Author: Mudassir Mohammed
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------****************************************************INITIALIZATION*************************************************------------------------------------
+
+install git and use git bash for git commands
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+$ git init --> initializes git in the current repository
+
+README.md --> we can specify information regarding our project or repository in this file
+.gitignore --> if we don't want to push any specific files such as secret files or passwords onto github or remote repo we can mention those files' paths in this file 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Configuring name and email in local:
+
+$ git config --global user.email "xyz@gmail.com"
+$ git config --global user.name "xyzxyz"
+$ git config --global credential.username "githubUsername"
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------****************************************************BASICS*************************************************--------------------------------------------
+
+Check the remote repository on local machine:
+$ git remote -v 	(it shows us alias name of remote repo and what is the remote repository set up in our local machine for both pulling and pushing changes)
+		  	(origin is a common alias name for remote repo)
+
+$ git remote rename currentRemoteAliasName newRemoteAliasName --> $ git remote rename origin beanstalk (changes remote alias name from origin to beanstalk)
+
+Add/config a remote repository in local:
+$ git remote add origin https://github.com/username/repositoryname.git (adds the remote repo with alias name origin)
+$ git remote add second https://github.com/username/repositoryname.git (adds the remote repo with alias name second)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Clone repository: (if a github repository or remote repository is not on local machine, you clone it. If it is already on local machine you can pull the changes and not clone)
+$ git clone "https://github.com/username/repositoryname.git" 				(this will clone the remote repo as default alias name origin)
+$ git clone "https://github.com/username/repositoryname.git" --origin second 		(this will clone the remote repo as the alias name second)
+
+Pull changes from remote repo:
+$ git pull remoteName branchName --> $ git pull origin main 
+
+Push changes from local to remote:
+1. stage the changes (staging area prepares files which are to be pushed to github)
+2. check the status
+3. commit the changes
+4. push the changes
+
+	$ git add filename 	(adds the file named filename which is changed to staging area)
+	$ git add . 		(adds all the files that have been changed to the staging area)
+
+	$ git status 		(tells us what are the files that are ready to be committed and shows tracked and untracked files)
+	
+	$ git restore --staged filename 	(this command unstages the file provided and the file is now untracked)
+	$ git restore . 				(unstages all files present in staging area)
+	
+	$ git commit 									(commit the local changes and a text editor pops up for writing the commit message)
+	$ git commit -m "Add a commit message here within quotes" 		(commits the local changes which will be pushed to remote and a commit message is added) 
+	$ git commit -am "some message"						(adds all the files and commits with the message)
+
+	$ git push remoteName brnachName --> $ git push origin main 	(pushes the committed files or changes to github or remote)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Revert/Reset commits:
+	If there are any errors in revert or reset and you want to abort the reset or revert you can use:
+		$ git revert --abort
+			or
+		$ git reset --abort
+
+	Reset: git reset can remove only latest n commits and cannot remove any arbitrary commit. We have three types of reset (hard, soft, default)
+		
+		(1) Default reset: (removes the commits and unstages the changes but the changes will not be removed)
+			syntax: 	$ git reset HEAD~numOfLatestCommitsToRemove
+			example: 	$ git reset HEAD~1 	(this removes the latest 1 commit from the current branch)
+		
+		(2) Soft reset: (removes the commits but the changes are there and they are staged as well)
+			syntax: 	$ git reset --soft HEAD~numOfLatestCommitsToRemove
+			example: 	$ git reset --soft HEAD~4 	(this removes the latest 4 commis from the current branch)
+
+		(3) Hard reset: (removes the commits and the changes are completely removed as well)
+			syntax: 	$ git reset --hard HEAD~numOfLatestCommitsToRemove
+			example: 	$ git reset --hard HEAD~3 	(this removes the latest 3 commits from the current branch)
+
+		Now once you reset the changes there might be extra commits in the remote repo so you will not be able to push the changes to remote as local will be behind repo
+		by some commits. In this case you can force push the changes by using --force flag. Now those extra commits in github or remote will be removed as well.
+			$ git push --force origin main (use this carefully when you know what you are doing because the changes will be lost)
+
+	Revert: git revert will undo the changes of a specific commit by adding a new commit. In other words get revert will add a new commit which will undo the changes done in 
+		  specified commit.
+			
+			syntax: 	$ git revert commitID
+			example: 	$ git revert adsg56163a1dsg3a1dailkdshfasldkgjalkdhg
+
+	It is generally safe to do revert and not reset because revert saves the commit history.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+$ git log 	(shows us the local commits that we have on the current branch with the commit id's, commit messages, authors and dates)
+
+$ git diff 	(shows us what are the changes we have made in all files which have not been staged yet)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------****************************************************BRANCHES*************************************************------------------------------------------
+
+Why we need branches?
+	Imagine you and your friend are working on a same branch, you might push some changes, then he might push some changes, then again you push yours. Now let's assume he wants
+	to revert his changes as he found some bugs now even your last changes will be reverted back. So it is not ideal that everyone is working on the same branch. Hence the concept
+	of branches is important.
+
+Make new branch for editing or making changes or adding a feature etc:
+	Let us assume we have a stable working branch and the code is stable at the latest commit. Now if you want to work and make some changes it is ideal that you create a new 
+	branch, from the stable branch. Now this new branch will have the code from the stable branch and you can make changes on this new branch. After making changes and running 
+	tests, if you are confident that your app is working fine without any problems then you can merge this new branch back to the original stable branch.
+	
+	Similary other developers will also make other new branches to implement or add their features and merge them back if everything is working perfectly.
+
+
+
+$ git branch 					(lists all the branches in your local machine)
+$ git branch -M xyz 				(renames the current branch to xyz)
+$ git checkout -b feature 			(checkout switches to the said branch and -b here is important, here -b is for creating a new branch)
+$ git checkout main 				(switches to main branch)
+$ git branch -d branchname			(deletes the local branch named branchname if it has already been pushed and merged with the remote branch)
+$ git branch -D branchname 			(deletes the local branch named branchname forcefully even if hasn't been pushed or merged yet)
+$ git push origin --delete branchname	
+		or					(deletes the remote branch named branchname)
+$ git push origin :branchname			
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PULL REQUEST:
+	You can create a pull request by going to Pull requests tab in the repository.
+
+	Let's assume you have a main branch and a feature branch. Now you want to merge feature branch into main branch. Then you should create a pull request from feature branch
+	to main branch. Here base should be main and compare should be feature.
+		base: main <-- compare: feature
+
+	Once you create the pull request you have the option to add reviewers to it. They will review your code and they also have the option to stop the merging or close the pull
+	request and leave a comment if he/she wants to.
+
+	In pull requests, the reviewers can directly see the changes by going to the commits tab and files changed tab. They can further review and request some more changes.
+
+	MERGING PULL REQUEST:
+		Now for merging the pull request we have three options:
+			Create a merge commit:
+				All commits from the compare branch will be added to the base branch via a merge commit i.e., all commits will be attached to the base branch.
+		
+			Squash and merge:
+				All commits from the compare branch will be combined into one commit in the base branch.
+	
+			Rebase and merge:
+				All commits from the compare branch will be rebased and added to the base branch.
+
+		Once the merging is done, we can delete the compare branch as we no longer require it.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+MERGE BRANCHES:
+	To merge a branch say new-branch to main, checkout to main branch first
+		$ git checkout main
+	
+	Then go ahead with the merge command and mention the branch name which is to be merged to main
+		$ git merge new-branch
+	
+	Doing this will preserve the commits history and it will be in order, then at the top a new merge commit is created showing the merge
+
+
+REBASE BRANCHES:
+	Rebase is similar to merge but there are a few key differences:
+		(1) Commit history will get changed (commits order) --> the base branch (in our case, main) commits will be at the top
+		(2) Commit IDs will also get changed
+		(3) No additional rebase commit is added like in merge we have an additional merge commit at the top
+	
+	To rebase a branch say new-branch to main, checkout to main branch first
+		$ git checkout main
+	
+	Then go ahead with the rebase command and mention the branch name which is to be rebased to main.
+		$ git rebase new-branch	
+
+	We can use rebase on our local branches where we are working but we should not use rebase on public branches because commit history will be changed.
+
+
+MERGE CONFLICT:
+	Let us assume, that you have made some changes in a file which has phone number: 123456789. Now another developer working on the same file has pushed his changes on github 
+	or remote and he has also made changes in phone number ie., phone number: 987654321. Now, when you try to pull the code from github on your local, git gets confused as to 
+	which code to keep, yours or his because we have a conflict at phone number. So git gets confused to keep your code or his code or reject them both. This is known as merge 
+	conflict.
+
+	In the files that have merge conflicts, we have these new lines as "conflict dividers". The ======= line is the "center" of the conflict. All the content between the center 
+	and the <<<<<<< HEAD line is content that exists in the current branch main which the HEAD ref is pointing to. Alternatively all content between the center and >>>>>>> somebranch 
+	is content that is present in our merging branch somebranch.
+
+	Now this is just a small example, in large projects with many files and many developers this might become a real issue.
+
+	To resolve the above issue you will open the files where there are merge conflicts and resolve it. Then add and commit those files. After committing the files you can continue 
+	the rebase command which will be mentioned by git when the merge conflict occurs. It generally is $ git rebase --continue. Then you can go ahead with the push.
+	
+	Here we basically create a new commit through the above process where the merge conflicts are resolved.
+
+	We can also use softwares like sublime merge to resolve merge conflicts.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GIT STASH:
+Sometimes you want to switch the branches, but you are working on an incomplete part of your current project. You don't want to make a commit of half-done work. Or you might have made
+the changes on the incorrect branch and don't want to commit it there. Then you can stash the changes temporarily and checkout the correct branch and apply the changes there instead. 
+Git stashing allows you to do so. The git stash command enables you to switch branches without committing the current branch.
+
+Generally, the stash's meaning is "store something safely in a hidden place." The sense in Git is also the same for stash; Git temporarily saves your data safely without committing.
+
+$ git stash 						(the work is temporarily saved with git stash command)
+
+$ git stash save "<Stashing Message>" 	(the work is stashed with a message)
+
+$ git stash list					(check the stored stashes)
+If we have more than one stash, then It will display all the stashes respectively with different stash id. It will show all the stashes with indexing as stash@{0}: stash@{1}: and so on.
+
+$ git stash apply					(this applies the changes in stash to the current branch without removing it from stack)
+In case of more than one stash, you can use "git stash apply" command followed by stash index id to apply the particular commit. As such,
+$ git stash apply stash@{1}
+If we don't specify a stash, Git takes the most recent stash and tries to apply it.
+
+$ git stash changes 				(it shows the file that is stashed and changes made on them)
+
+$ git stash pop					(this applies the changes in stash to the current branch and removes it from stack)
+
+$ git stash drop					(deletes the stash from the stack)
+In case of more than one stash, you can use "git stash drop" command followed by stash index id to apply the particular commit. As such,
+$ git stash drop stash@{1}
+
+$ git stash clear					(deletes all available stashes at once and clears the stack)
+
+If you stashed some work on a particular branch and continue working on that branch. Then, it may create a conflict during merging. So, it is good to stash work on a separate branch.
+The git stash branch command allows the user to stash work on a separate branch to avoid conflicts. The syntax for this branch is as follows:
+$ git stash branch <Branch Name> 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Collaborators:
+	You can add collaborators to any of your repositories and control their access levels. If they can push add edit etc. By default no one can push or delete files from
+	your repository. Then how does open source work where many people can contribute. An admin cannot keep adding people as collaborators. We have the fork option.
+
+Fork repository:
+	Fork will create a new repository which will be exactly like the repository you forked in your own account. Making changes here will only make the changes in the forked 
+	repository in your account and not the original repository which was forked. To reflect your changes in the original repository you have to create a pull request.
+
+
