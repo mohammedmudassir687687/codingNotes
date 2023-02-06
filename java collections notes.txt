@@ -1,0 +1,182 @@
+Author: Mudassir Mohammed
+Title: Java Collections
+
+--------------------------------------------------------------------------------------------------------
+ArrayList:
+uses dynamic array internally
+ArrayList<type> arrList = new ArrayList<>();
+List<type> arrList = Arrays.asList("C", "C++", "Java");
+
+methods:
+.add(element)
+.add(index, element)
+.remove(element)
+.contains(element)
+.isEmpty()
+.forEach((element) -> {
+	System.out.println(element);
+})
+.size()
+.clear()
+.indexOf(element) // first occurence
+.lastIndexOf(element)
+.addAll(element1, element2, arrayOfElements)
+.removeAll(arrayOfElements)
+.get(index)
+.set(index,element)
+
+
+
+iterate:
+// basic for loop
+for (int i = 0; i < arrList.size(); i++) {
+	System.out.println(arrList.get(i));
+}
+
+// enhanced for each loop
+for (Type element: arrList) {
+	System.out.println(element);
+}
+
+// basic loop with iterator
+for (Iterator<Type> iterator = arrList.iterator(); iterator.hasNext();) {
+	Type element = (Type) iterator.next();
+	System.out.println(element);
+}
+
+// iterator with while loop
+Iterator<Type> it = arrList.iterator();
+while (it.hasNext()) {
+	Type element = (Type) iterator.next();
+	System.out.println(element);
+}
+
+// java 8 stream + lambda example
+arrList.stream().forEach(element -> System.out.println(element));
+arrList.stream().filter(element -> !"Java".equals(element)).forEach(element -> System.out.println(elment));
+
+// java 8 forEach + lambda
+arrList.forEach((element) -> System.out.println(element));
+
+
+
+Sorting lists:
+Collections.sort(listname);
+Collections.reverse(listname);
+
+// custom sorting, sorting an employee object by a single property salary example
+Collections.sort(employees, new MySort());
+class MySort implements Comparator<Employee> {
+	@Override
+	public int compare(Employee o1, Employee o2) {
+		return (int) (o1.getSalary() - o2.getSalary()); // ascending order
+		return (int) (o2.getSalary() - o1.getSalary()); // descending order
+	}
+} 
+
+				OR
+
+Collections.sort(employees, new Comparator<Employee>() {
+	@Override
+	public int compare(Employee o1, Employee o2) {
+		return (int) (o1.getSalary() - o2.getSalary()); // ascending order
+		return (int) (o2.getSalary() - o1.getSalary()); // descending order
+	}
+});
+
+				OR
+
+Collections.sort(employees, (o1, o2) -> (int) (o1.getSalary() - o2.getSalary()));
+Collections.sort(employees, (o1, o2) -> (o1.getName().compareTo(o2.getName())));
+--------------------------------------------------------------------------------------------------------
+
+
+LinkedList:
+uses doubly linked list internally
+List<type> l = new LinkedList<>();
+LinkedList<type> ll = new LinkedList<>();
+
+methods:
+.add(element)
+.add(index, element)
+.addFirst(element)
+.addLast(element)
+.getFirst()
+.getLast()
+.get(index)
+.contains(element)
+.remove(element)
+.removeFirst()
+.removeLast()
+.clear()
+.size()
+.indexOf(element)	// first occurence
+.lastIndexOf(element)
+
+--------------------------------------------------------------------------------------------------------
+
+Set and HashSet:
+HashSet is unordered set of unique elements.
+hashset uses hashmap internally
+allows one null element
+
+Set<Type> set = new HashSet<>();
+HashSet<Type> hs = new HashSet<>();
+HashSet<Type> hs = new HashSet<>(anotherHashSet/anotherList/anotherCollection);
+
+methods:
+.add(element)
+.addAll(anotherHashSet/anotherList/anotherCollection)
+.remove(element)
+.removeAll(anotherHashSet/anotherList/anotherCollection)
+.clear()
+.isEmpty()
+.contains(element)
+.size()
+
+--------------------------------------------------------------------------------------------------------
+
+HashMap:
+unordered collection of key-value pairs. unique keys.
+allows one null key
+
+Map<Type1, Type2> hmap = new HashMap<>();
+
+methods:
+.put(key, value) 
+.isEmpty() 
+.size()
+.clear()
+.containsKey(key)
+.containsValue(value)
+.get(key)
+.remove(key)
+.remove(key, value)
+.keySet() // returns a set of keys
+.values() // returns a collection of values
+
+iterate:
+// for each method
+for (Map.Entry<Type1, Type2> entry: hmap.entrySet()) {
+	System.out.println(entry.getKey());
+	System.out.println(entry.getValue());
+}
+
+// using iterator
+Set<Map.Entry<Type1, Type2>> entries = hmap.entrySet();
+Iterator<Map.Entry<Type1,Type2>> it = entries.iterator();
+while(it.hasNext()) {
+	Map.Entry<Type1,Type2> entry = iterator.next();
+	System.out.println(entry.getKey());
+	System.out.println(entry.getValue());
+}
+
+// java 8 forEach
+hmap.forEach((k,v) -> {
+	System.out.println(k);
+	System.out.println(v);
+});
+
+--------------------------------------------------------------------------------------------------------
+
+TreeSet and TreeMap are similar to HashSet and HashMap except that they are ordered
