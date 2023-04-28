@@ -1,0 +1,527 @@
+Author: Mudassir Mohammed
+-------------------------------------------------------------------------------------------------------------------------------
+
+using System;
+
+namespace ConsoleApp1 
+{
+	public class Program 
+	{
+		static void Main(string[] args) 
+		{
+			Console.WriteLine("Hello World");
+			Console.Write("What is your name? ");
+			string name = Console.ReadLine();
+			int age = 80;
+			Console.WriteLine($"Hello {name} Age {age}");
+			Console.WriteLine(@"Exactly what I type \n");			// known as verbatim strings
+
+			// another way of printing variables
+			Console.WriteLine("Hello {0} Age {1}", name, age);
+		}
+	}
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Miscalleneous:
+--------------
+
+(int)ch	// this will return ascii value of character ch
+
+char c = (char)65; char c = Convert.ToChar(65);		// ways to get ascii character from number
+
+// const is a constant created at compile time whereas readonly is a constant created at runtime
+public const string SHELTER = "Hi";
+public readonly int idNum;
+
+// you have to write virtual keyword to the method in the base class if you want to be able to override it in subclasses
+// you have to write override keyword if you are overriding a method. It is mandatory if you want to use that method else it will be hidden
+
+another way of writing constructors:
+------------------------------------
+public Animal() : this("No Name", "No Sound") {}
+public Animal(string name) : this(name, "No Sound") {}
+
+for inheritance to specify super class we use base keyword
+
+To check if any character in a string is a digit --> if(name.Any(char.IsDigit)
+
+// To print all array elements as string separated by delimeter
+String.Join(", ", numArray);
+
+
+// gives an array or enumerable of 1 to 10 and adds it to a list
+randomList.AddRange(Enumerable.Range(1, 10));
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Data Types:
+------------
+bool canIVote = true;
+
+int.MaxValue
+int.MinValue
+
+long.MaxValue
+long.MinValue
+
+// decimal has very large precision for decimal numbers, you end the decimal number with M
+decimal decVal = 3.145154654218515121541515215M;
+
+double dblPiVal = 3.141592;
+
+// end the float number with F
+float fltVal = 3.1415F;
+
+Other data Types:
+byte: 8-bit unsigned int 0 to 255
+char: 16-bit unicode character
+sbyte: 8-bit signed int -128 to 127
+short: 16-bit signed int
+uint: 32-bit unsigned int
+ulong: 64-bit unsigned int
+ushort: 16-bit unsgined int
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Casting:
+--------
+
+int intFromStr = Convert.ToInt32(Console.ReadLine());
+double dblX = Convert.ToDouble(x);
+
+bool boolFromStr = bool.Parse("true");
+int intFromStr = int.Parse("100");
+double dblFromStr = double.Parse("1.234");
+
+
+string strVal = dblFromStr.ToString();
+Console.WriteLine($"Data type: {strVal.GetType()}");
+
+Implicit conversion:
+It means we won't lose any data during conversion and is automatically done by compiler. Ex: int to double or long
+
+Explicit conversion:
+It means we will lose some data during conversion and is to be by the programmer explicitly. Ex: double to int
+
+double dblNum = 12.345
+int num = (int)dblNum;	// explicit
+
+long longNum = num		// implicit
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+Strings:
+------------------
+
+string randString = "This is a string";
+
+randString.Length
+randString.Contains("is");
+randString.IndexOf("is");
+randString.Remove(10, 6);				// removes 6 characters starting from 10th index
+randString.Insert(10, "short"); 			// Inserts "short" at index 10
+randString.Replace("string", "sentence")	// replaces string with sentence
+randString.Trim();
+randString.ToUpper();
+randString.ToLower();
+
+
+// return -ve +ve or 0 based on the comparison
+// the below functions return -1
+String.Compare("A", "B");									
+String.Compare("A", "B", StringComparison.OrdinalIgnoreCase);
+String.Equals("A", "a", StringComparison.Ordinal);
+String.Equals("A", "a", StringComparison.OrdionalIgnoreCase);
+
+
+StringBuilder sb = new StringBuilder("Random text");								// default 16 characters for StringBuilder
+StringBuilder sb2 = new StringBuilder("More Stuff that is very important", 256);		// updates default to 256 characters
+
+sb2.Capacity
+sb2.Length
+sb2.Append("Random Text");
+sb2.AppendLine("\nMore important text");
+sb2.Clear();
+sb.Equals(sb2);
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+Arrays:
+-------
+
+int[] favNums = new int[3];
+favNums[0] = 23;
+
+string[] customers = {"Bob", "Sally", "Sue"};
+var employees = new[] {"Mike", "Paul", "Rick"};
+
+object[] randomArray = {"Paul", 45, 1.234};
+
+for (int i = 0; i < randomArray.Length; i++) 
+{
+	Console.WriteLine(randomArray[i]);
+}
+
+
+
+
+Multi-Dimensional Arrays:
+-------------------------
+string[,] custNames = new string[2,2] {{"Bob", "Smith"}, {"Sally", "Sue"}};
+custNames.GetValue(0,1);	// Smith
+
+for (int j = 0; j < custNames.GetLength(0); j++)
+{
+	for (int k = 0; k < custNames.GetLength(1); k++) 
+	{
+		Console.WriteLine("{0} ", custNames[j,k]);
+	}
+	Console.WriteLine();
+}
+
+
+
+Array functions/Properties:
+----------------
+.Length
+Array.Sort(randomArray);
+Array.Reverse(randomArray);
+Array.IndexOf(randomArray, 1);	// finds the index of element 1 in randomArray
+randomArray.SetValue(0,1);		// sets the value to 0 at index 1
+
+
+for custom sorting:
+write a comparator function taking in two arguments and pass that function as the argument in sort function like Sort(cmpFunc).
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+foreach()
+---------
+
+foreach(int k in intArray)
+{
+	Console.WriteLine(k);
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+out parameter:
+---------------
+
+static void DoubleIt(int x, out int solution) {
+	solution = x*2;
+}
+
+static void Main(string[] args) {
+	int solution;
+	DoubleIt(15, out solution);
+	Console.WriteLine(solution);	
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+pass by reference:
+-------------------
+
+// arrays and all other objects are pass by reference by default for values however look below
+
+public static void Swap(ref int num3, ref int num4) {
+	int temp = num3;
+	num3 = num4;
+	num4 = temp;
+}
+
+static void main(string[] args) {
+	int num3 = 10;
+	int num4 = 20;
+	Swap(ref num3, ref num4);		// passes in the references
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+passing in unknown number of parameters:
+----------------------------------------
+
+// the params array argument has to be the last one 
+static double GetSumMore(params double[] nums) {
+	double sum = 0;
+	foreach (int i in nums) {
+		sum += i;
+	}
+	return sum;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+DateTime/TimeSpan:
+-------------------
+
+DateTime awesomeDate = new DateTime(yyyy, mm, dd);
+.AddDays(4);
+.AddMonths(1);
+.AddYears(1);
+.ToString();
+
+TimeSpan lunchTime = new TimeSpan(12, 30, 0);
+.Subtract(new TimeSpan(0, 15, 0));
+.ToString();
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+enum:
+-----
+
+enum CarColor : byte {
+	Orange = 1,
+	Blue,
+	Green,
+	Red
+}
+
+// usage
+CarColor car1 = CarColor.Blue;
+PaintCar(car1);
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Getters/Setters Properties in class:
+-------------------------------------
+
+public int x {get; set;};
+public string Name { get; set; } = "Mudassir";
+
+// we have a keyword value for getting the value entered by the user for that property
+public string Sound {
+	get {return sound; }
+	set {
+		if (value.Length > 10) {
+			sound = "No Sound";
+		} else {
+			sound = value;
+		}
+	}
+} 
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+ArrayList:
+-----------
+
+ArrayList aList = new ArrayList();
+.Count
+.Capacity
+.Add()
+.AddRange()	// takes an enumerable like another arraylist or linkedlist or array or set so on
+.Sort()
+.Reverse()
+.Insert(index, elem)
+.RemoveAt(index)
+.RemoveRange(index, length)
+.IndexOf(elem)
+.ToArray(typeof(datatype))
+.Clear()
+
+
+for custom sorting:
+write a comparator function taking in two arguments and pass that function as the argument in sort function like Sort(cmpFunc).
+-------------------------------------------------------------------------------------------------------------------------------
+
+Dictionary:
+-----------
+
+// sample syntax
+Dictionary<string, string> superheroes = new Dictionary<string, string>();
+string val = superheroes["Clark Kent"];
+.Count
+.Keys.ToList()	// returns the list of keys	
+.Add("Clark Kent", "Superman")
+.Remove("Clark Kent")
+.ContainsKey("Clark Kent")
+.Clear()
+
+
+foreach (KeyValuePair<string, string> item in superheroes) {
+	Console.WriteLine(item.Key + item.Value);
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Queue:
+------
+
+Queue queue = new Queue();
+.Enqueue(elem)
+.Contains(elem)
+.Dequeue()
+.Peek()
+.ToArray()
+.Clear()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Stack:
+------
+
+Stack stack = new Stack();
+.Push(elem)
+.Peek()
+.Pop()
+.Contains(elem)
+.ToArray()
+.Clear()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Delegate:
+---------
+
+A delegate is a type that represents references to methods with a particular parameter list and return type. When you instantiate a delegate, you can associate its instance with any method with a compatible signature and return type.
+
+public delegate void Arithmetic(double num1, double num2);
+
+public static void Add(double num1, double num2) {
+	Console.WriteLine(num1 + num2);
+}
+
+public static void Subtract(double num1, double num2) {
+	Console.WriteLine(num1 - num2);
+}
+
+
+Arithmetic add, sub, addSub;
+add = new Arithmetic(Add);
+sub = new Arithmetic(Subtract);
+addSub = add + sub;
+
+add(6,10)
+addSub(10,4);
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Lambda function:
+----------------
+
+delegate double doubleIt(double val);
+
+doubleIt dblIt = x => x * 2;
+
+dblIt(4);
+
+------------------------------------------------------------------------------------------------------------------------------- 
+
+Where and Select:
+------------------
+
+var evenList = numList.Where(a => a % 2 == 0).ToList();
+var squares = intList.Select(x => x*x);
+
+
+Zip:
+----
+var listOne = new List<int>(new int[] {1,3,4});
+var listTwo = new List<int>(new int[] {5,6,8});
+var sumList = listOne.Zip(listTwo, (x, y) => x + y).ToList();		// returns a list containing 6, 9, 12
+
+
+Aggregate and Average:
+-----------------------
+numList.Aggregate((a,b) => a+b);		// returns sum of all numbers in the list
+numList.AsQueryable().Average();		// returns average of all numbers in the list
+
+
+All, Any, Distinct, Intersect, Except:
+--------------------------------------
+numList.All(x => x > 3);				// returns true if all numbers in the list are greater than 3 else false
+numList.Any(x => x > 3);				// return true if any number in the list is greater than 3 else false
+numList.Distinct();					// returns distinct numbers from the list
+numList.Intersect(numList2);			// returns common numbers
+numList.Except(numList2);				// returns numList numbers which are not present in numList2
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+IEnumerable:
+------------
+class AnimalFarm : IEnumerable
+{
+	private List<Animal> animalList = new List<Animal>();
+	
+	public AnimalFarm(List<Animal> animalList) 
+	{
+		this.animalList = animalList;
+	}
+
+	public AnimalFarm() { }
+
+	public Animal this[int index]
+	{
+		get { return (Animal)animalList[index]; }
+		set { animalList.Insert(index, value); }
+	}
+	
+	public int Count 
+	{
+		get { return animalList.Count; }
+	}
+
+	public IEnumerator GetEnumerator()
+	{
+		return animalList.GetEnumerator();
+	}
+}
+
+
+public class Program
+{
+	static void Main(string[] args)
+	{
+		AnimalFarm myAnimals = new AnimalFarm();
+		myAnimals[0] = new Animal("Wilbur");
+		myAnimals[0] = new Animal("Tommy");
+	}
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+LINQ: Language Integrated Query:
+--------------------------------
+
+string[] dogs = {"K 9", "Brian Griffin",
+            "Scooby Doo", "Old Yeller", "Rin Tin Tin",
+            "Benji", "Charlie B. Barkin", "Lassie",
+            "Snoopy"};
+
+var dogSpaces = from dog in dogs
+                where dog.Contains(" ")
+                orderby dog descending
+                select dog;
+
+-----------------------------------------------------------------------------------
+
+int[] nums = { 5, 10, 15, 20, 25, 30, 35 };
+
+            // Get numbers bigger then 20
+var gt20 = from num in nums
+           where num > 20
+           orderby num
+           select num;
+
+-----------------------------------------------------------------------------------
+
+var innerJoin = from animal in animals
+                join owner in owners on animal.AnimalID
+                equals owner.OwnerID
+                select new { OwnerName = owner.Name, AnimalName = animal.Name };
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
