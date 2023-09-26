@@ -1,0 +1,74 @@
+Author: Mudassir Mohammed
+Date: September 26, 2023
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Thread t = Thread.CurrentThread;
+t.Name = "Main Thread";
+Console.WriteLine(Thread.CurrentThread.Name);
+
+
+Thread.Sleep(5000); // 5 seconds
+
+
+// Here Test1, Test2, Test 3 are method names the three threads will run simultaneously the three methods
+Thread t1 = new Thread(Test1);
+Thread t2 = new Thread(Test2);
+Thread t3 = new Thread(Test3);
+t1.Start(); t2.Start(); t3.Start();
+
+
+
+t1.Abort() aborts the thread
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// ThreadStart delegate has signature of void and no parameters 
+ThreadStart obj = new ThreadStart(Test); or ThreadStart obj = Test; or ThreadStart obj = delegate() { Test(); }; or ThreadStart obj = () => Test();
+Thread t = new Thread(obj);
+t.Start();
+
+Thread t = new Thread(Test);
+t.Start();
+
+// there is no difference in the above two in the second case CLR (common language runtime) implicitly creates the ThreadStart delegate
+// you can use the delegate with parameters if your function has a parameter, the delegate will be ParameterizedThreadStart instead of ThreadStart and pass the value in t.Start(50) as such.
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ t.Join() method:
+------------------
+join method will make the current thread wait until the specific thread t completes finishing the job
+example: if you write t1.Join(); t2.Join() and t3.Join() in main thread, then main thread will wait until the specific threads have completed
+executing before moving forward.
+
+you can also pass milliseconds in join method as such t.Join(3000). Here main thread will move forward either after thread t completes execution
+or even if the 3000 milliseconds have elapsed.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+locking:
+--------
+public void Display() {
+	lock(this)
+	{
+		some code
+	}
+}
+
+// here the code can be locked using lock(this) so that multiple threads running the same function can only access one at a time.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Thread priorities:
+------------------
+t.Priority = ThreadPriority.Normal
+
+// there are 5 priorities 
+AboveNormal
+BelowNormal
+Highest
+Lowest
+Normal
