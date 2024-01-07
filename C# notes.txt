@@ -26,6 +26,7 @@ namespace ConsoleApp1
 
 Miscalleneous:
 --------------
+HashSet<char> charSet = new HashSet<char>();
 
 (int)ch	// this will return ascii value of character ch
 
@@ -192,7 +193,7 @@ Array.Sort(randomArray);
 Array.Reverse(randomArray);
 Array.IndexOf(randomArray, 1);	// finds the index of element 1 in randomArray
 randomArray.SetValue(0,1);		// sets the value to 0 at index 1
-
+.Contains(value);
 
 for custom sorting:
 write a comparator function taking in two arguments and pass that function as the argument in sort function like Sort(cmpFunc).
