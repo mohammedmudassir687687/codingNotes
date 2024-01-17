@@ -29,8 +29,7 @@ Miscalleneous:
 HashSet<char> charSet = new HashSet<char>();
 
 (int)ch	// this will return ascii value of character ch
-
-char c = (char)65; char c = Convert.ToChar(65);		// ways to get ascii character from number
+char c = (char)(i1 + '0'); // ways to get ascii character from number
 
 // const is a constant created at compile time whereas readonly is a constant created at runtime
 public const string SHELTER = "Hi";
